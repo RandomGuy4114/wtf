@@ -91,11 +91,13 @@ func JudgeError(output string) bool {
 			log.Printf("skipping module %q: %v", modulePath, err)
 			continue
 		}
-
 		for _, e := range data.Errors {
 			for _, s := range e.Strings {
 				if strings.Contains(lowerOutput, strings.ToLower(s)) {
+					fmt.Println(divider())
 					fmt.Printf("%s: %s\nFix: %s\n", data.Name, e.Message, e.Fix)
+					fmt.Println(divider())
+					LogMessage(fmt.Sprintf("%s: %s | Fix: %s", data.Name, e.Message, e.Fix))
 					return true
 				}
 			}

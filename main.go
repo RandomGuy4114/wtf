@@ -7,6 +7,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"os"
 	"os/exec"
@@ -18,10 +19,14 @@ import (
 func main() {
 	defaultCommand := os.Getenv("COMMAND")
 	defaultFile := os.Getenv("FILE")
+	logFile := os.Getenv("LOG_FILE")
 	commandPtr := flag.String("r", defaultCommand, "Command to run")
 	filePtr := flag.String("f", defaultFile, "File to check for errors (required)")
 	versionPtr := flag.Bool("v", false, "Print version information")
+	logFilePtr := flag.String("l", logFile, "Log file path (optional)")
 	flag.Parse()
+
+	checkers.SetLogFile(*logFilePtr)
 
 	if *versionPtr {
 		printVersion()
@@ -51,6 +56,7 @@ func main() {
 	cmd := exec.Command(parts[0], parts[1:]...)
 
 	out, err := cmd.CombinedOutput()
+	checkers.LogMessage(fmt.Sprintf("ran %q, output: %s", *commandPtr, string(out)))
 	if err != nil {
 		log.Printf("Error found, diagnosing.")
 		println(string(out))
@@ -59,8 +65,10 @@ func main() {
 		}
 		if !checkers.JudgeError(string(out) + " " + err.Error()) {
 			log.Printf("No known fix found.")
+			checkers.LogMessage("no known fix found")
 		}
 	} else {
 		log.Printf("Command executed successfully.")
+		checkers.LogMessage(fmt.Sprintf("ran %q successfully", *commandPtr))
 	}
 }
