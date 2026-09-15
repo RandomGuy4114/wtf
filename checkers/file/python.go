@@ -50,10 +50,12 @@ func diagnosePythonError(output, path string) {
 			if idx := strings.Index(lowerOutput, strings.ToLower(s)); idx != -1 {
 				CombinedString := fmt.Sprintf("%s: %s\nFix: %s\n", data.Name, e.Message, e.Fix)
 				fmt.Print(color.RedString(CombinedString))
-				if loc := nearestLocation(locs, idx); loc != "" {
+				loc := nearestLocation(locs, idx)
+				if loc != "" {
 					fmt.Println(color.YellowString("Location: %s", loc))
 				}
 				fmt.Println(divider())
+				checkers.LogMessage(fmt.Sprintf("%s: %s | Fix: %s | Location: %s", data.Name, e.Message, e.Fix, loc))
 				found = true
 				break
 			}
@@ -65,5 +67,6 @@ func diagnosePythonError(output, path string) {
 		if loc := nearestLocation(locs, 0); loc != "" {
 			fmt.Println(color.YellowString("Location: %s", loc))
 		}
+		checkers.LogMessage("no known fix found for Python error in " + path)
 	}
 }
