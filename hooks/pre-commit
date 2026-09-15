@@ -1,0 +1,31 @@
+#!/bin/sh
+# Runs wtf against the known-broken fixtures in tests/ before allowing a
+# commit, to catch regressions in the checkers. Install with:
+#   git config core.hooksPath hooks
+
+set -e
+
+echo "Building wtf..."
+go build -o bin/wtf .
+
+fail=0
+
+for fixture in tests/js/*.js tests/python/*.py; do
+	[ -e "$fixture" ] || continue
+
+	echo "Checking $fixture..."
+	output=$(./bin/wtf -f "$fixture" 2>&1)
+
+	if ! echo "$output" | grep -q "Fix:"; then
+		echo "FAILED: $fixture did not produce a known fix"
+		echo "$output"
+		fail=1
+	fi
+done
+
+if [ "$fail" -ne 0 ]; then
+	echo "pre-commit: one or more test fixtures did not diagnose as expected"
+	exit 1
+fi
+
+echo "All test fixtures diagnosed correctly."

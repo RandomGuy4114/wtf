@@ -1,0 +1,49 @@
+{
+    "name": "Network",
+    "description": "Checks for common network/connectivity errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "connection refused"
+            ],
+            "message": "Connection refused",
+            "fix": "Make sure the target service is running and listening on the expected host/port"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "connection timed out",
+                "timeout"
+            ],
+            "message": "Connection timed out",
+            "fix": "Check your network connection, firewall rules, and that the host is reachable"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "no such host",
+                "name or service not known"
+            ],
+            "message": "DNS lookup failed",
+            "fix": "Check the hostname for typos and verify your DNS settings"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "certificate has expired",
+                "x509: certificate"
+            ],
+            "message": "TLS certificate error",
+            "fix": "Renew or fix the certificate, or check your system clock is correct"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "network is unreachable"
+            ],
+            "message": "Network is unreachable",
+            "fix": "Check your network interface and routing configuration"
+        }
+    ]
+}

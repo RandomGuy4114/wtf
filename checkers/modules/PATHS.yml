@@ -1,0 +1,6 @@
+paths:
+  system: "json/system.json"
+  git: "json/git.json"
+  network: "json/network.json"
+  js: "json/js.json"
+  python: "json/python.json"

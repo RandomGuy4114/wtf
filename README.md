@@ -1,0 +1,2 @@
+# wtf
+WTF (which stands for "why the f*** is this not working?) Is a utility meant for developers to easily debug their programs, it allows users to quickly diagnose errors while also seeing solutions to the errors

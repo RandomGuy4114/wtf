@@ -1,0 +1,47 @@
+{
+    "name": "Git",
+    "description": "Checks for common git errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "not a git repository"
+            ],
+            "message": "Not inside a git repository",
+            "fix": "Run the command from inside a git repository, or run 'git init' to create one"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "failed to push some refs",
+                "updates were rejected"
+            ],
+            "message": "Push rejected because the remote has commits you don't have locally",
+            "fix": "Run 'git pull --rebase' to incorporate the remote changes, then push again"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "merge conflict"
+            ],
+            "message": "Merge conflict",
+            "fix": "Resolve the conflicting files, then 'git add' them and continue the merge/rebase"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "detected dubious ownership"
+            ],
+            "message": "Git refuses to operate on a repo owned by another user",
+            "fix": "Run 'git config --global --add safe.directory <path>' for the repo path"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "could not resolve host"
+            ],
+            "message": "Git could not reach the remote host",
+            "fix": "Check your network connection and that the remote URL is correct"
+        }
+    ]
+}
