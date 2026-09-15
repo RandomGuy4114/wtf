@@ -1,0 +1,80 @@
+{
+    "name": "JavaScript",
+    "description": "Checks for common JavaScript/Node.js errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "is not defined"
+            ],
+            "message": "Reference to an undeclared variable",
+            "fix": "Declare the variable before use, or check for a typo in its name"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot find module"
+            ],
+            "message": "A required module could not be resolved",
+            "fix": "Run 'npm install' to install missing dependencies, or check the import path"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unexpected token"
+            ],
+            "message": "Syntax error in the file",
+            "fix": "Check the file for a missing bracket, brace, or comma near the reported location"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot read propert",
+                "cannot read propert of undefined",
+                "cannot read propert of null"
+            ],
+            "message": "Attempted to access a property on undefined or null",
+            "fix": "Add a null/undefined check before accessing the property"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "is not a function"
+            ],
+            "message": "Called a value that is not a function",
+            "fix": "Check that the variable holds the function you expect, and that it's imported correctly"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unexpected identifier"
+            ],
+            "message": "An unexpected identifier was found",
+            "fix": "Replace the unexpected identifier with a valid one."
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unexpected end of input"
+            ],
+            "message": "The file ended unexpectedly, likely due to a missing closing bracket or brace",
+            "fix": "Check the file for unclosed brackets, braces, or parentheses"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "missing ) after argument list"
+            ],
+            "message": "A function call is missing its closing parenthesis",
+            "fix": "Check the file for an unclosed parenthesis in a function call"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "syntaxerror"
+            ],
+            "message": "Syntax error in the file",
+            "fix": "Check the file near the reported location for invalid JavaScript syntax"
+        }
+    ]
+}

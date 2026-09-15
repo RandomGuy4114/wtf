@@ -1,0 +1,96 @@
+{
+    "name": "Python",
+    "description": "Checks for common Python errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "nameerror",
+                "is not defined"
+            ],
+            "message": "Reference to an undeclared name",
+            "fix": "Declare the variable before use, or check for a typo in its name"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "modulenotfounderror",
+                "no module named"
+            ],
+            "message": "A required module could not be found",
+            "fix": "Run 'pip install <module>' to install the missing dependency, or check the import path"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "importerror"
+            ],
+            "message": "A module or name could not be imported",
+            "fix": "Check that the module is installed and the imported name actually exists in it"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "indentationerror"
+            ],
+            "message": "Inconsistent or incorrect indentation",
+            "fix": "Check the file for mismatched tabs/spaces or a missing indent after a colon"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "syntaxerror"
+            ],
+            "message": "Syntax error in the file",
+            "fix": "Check the file near the reported location for invalid Python syntax"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "typeerror"
+            ],
+            "message": "An operation was applied to a value of the wrong type",
+            "fix": "Check the types of the values involved and convert or fix them as needed"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "attributeerror"
+            ],
+            "message": "Attempted to access an attribute that doesn't exist on the object",
+            "fix": "Check the object's type and available attributes/methods, or check for a typo"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "indexerror"
+            ],
+            "message": "Attempted to access a list/sequence index that is out of range",
+            "fix": "Check the length of the sequence before indexing into it"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "keyerror"
+            ],
+            "message": "Attempted to access a dictionary key that doesn't exist",
+            "fix": "Check the key exists first, or use dict.get() with a default value"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "zerodivisionerror"
+            ],
+            "message": "Attempted to divide by zero",
+            "fix": "Check the divisor isn't zero before performing the division"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "valueerror"
+            ],
+            "message": "A value of the right type but inappropriate content was passed to a function",
+            "fix": "Check the value being passed matches what the function expects"
+        }
+    ]
+}

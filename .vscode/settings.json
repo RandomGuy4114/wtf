@@ -1,0 +1,8 @@
+{
+  // tests/ holds intentionally-broken .js/.py fixtures used to exercise
+  // the checkers on every commit — don't flag them as editor errors.
+  "javascript.validate.enable": false,
+  "js/ts.implicitProjectConfig.checkJs": false,
+  "python.analysis.exclude": ["tests/**"],
+  "eslint.ignorePatterns": ["tests/**"]
+}

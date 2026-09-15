@@ -1,0 +1,7 @@
+/wtf
+*.exe
+*.test
+.DS_Store
+
+bin/*
+!bin/.gitkeep

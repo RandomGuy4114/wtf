@@ -1,0 +1,41 @@
+{
+    "name": "System",
+    "description": "Checks for system errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "executable file not found in",
+                "command not found"
+            ],
+            "message": "Command not found",
+            "fix": "Make sure the command you are trying to run exists in your $PATH"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unknown option",
+                "invalid option",
+                "unrecognized option"
+            ],
+            "message": "Invalid option",
+            "fix": "Check the command's help page for valid options"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "permission denied"
+            ],
+            "message": "Permission denied",
+            "fix": "Make sure you have the necessary permissions to run the command"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "no such file or directory"
+            ],
+            "message": "File or directory not found",
+            "fix": "Make sure the file or directory exists and the path is correct"
+        }
+    ]
+}
