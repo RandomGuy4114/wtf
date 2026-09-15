@@ -35,6 +35,10 @@ func SetLogFile(path string) {
 	logFileMu.Lock()
 	defer logFileMu.Unlock()
 	logFilePath = path
+	if path == "" {
+		return
+	}
+
 	f, err := os.OpenFile(path, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "failed to open log file: %v\n", err)
