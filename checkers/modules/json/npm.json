@@ -1,4 +1,64 @@
 {
     "name": "npm",
-    "description": "Checks for common npm errors"
+    "description": "Checks for common npm errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "code eresolve"
+            ],
+            "message": "npm couldn't resolve a compatible set of dependency versions",
+            "fix": "Try 'npm install --legacy-peer-deps', or fix the conflicting version ranges in package.json"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "code enoent"
+            ],
+            "message": "npm couldn't find a required file, often package.json",
+            "fix": "Make sure you're running npm from the project root and package.json exists"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "404 not found"
+            ],
+            "message": "A package could not be found in the registry",
+            "fix": "Check the package name for typos, and that it's published (or private with correct registry auth)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "code eacces",
+                "code eperm"
+            ],
+            "message": "npm doesn't have permission to write to a required directory",
+            "fix": "Avoid using sudo with npm; fix ownership of the npm/global directories instead"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "missing script:"
+            ],
+            "message": "The npm script you tried to run isn't defined",
+            "fix": "Check the \"scripts\" section of package.json for the correct script name"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "engine \"node\" is incompatible"
+            ],
+            "message": "The installed Node.js version doesn't satisfy the package's engines requirement",
+            "fix": "Switch to a Node version that satisfies the \"engines\" field (e.g. via nvm)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "code err_socket_timeout",
+                "network timeout"
+            ],
+            "message": "A registry request timed out",
+            "fix": "Check your network connection, or try a different registry/proxy"
+        }
+    ]
 }

@@ -26,7 +26,7 @@ const (
 )
 
 func printVersion() {
-	fmt.Printf(logo)
+	fmt.Print(logo)
 	fmt.Printf("wtf version: %s\n", version)
 	fmt.Printf("Go version: %s\n", runtime.Version())
 }

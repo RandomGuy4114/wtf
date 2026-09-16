@@ -1,0 +1,104 @@
+{
+    "name": "Rust",
+    "description": "Checks for common Rust errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot find value",
+                "cannot find function"
+            ],
+            "message": "Reference to an undeclared value or function",
+            "fix": "Declare it before use, check for a typo, or add the missing import"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "mismatched types"
+            ],
+            "message": "A value of the wrong type was used",
+            "fix": "Check the expected type and convert or fix the value being passed"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "borrow of moved value"
+            ],
+            "message": "Attempted to use a value after ownership of it was moved",
+            "fix": "Clone the value before the move, or restructure the code to avoid moving it early"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot borrow",
+                "as mutable"
+            ],
+            "message": "A mutable borrow conflicts with an existing borrow",
+            "fix": "Make sure there's only one mutable borrow (or no immutable borrows) active at a time"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unresolved import"
+            ],
+            "message": "An imported crate or module could not be resolved",
+            "fix": "Check the import path, and that the crate is listed in Cargo.toml"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "thread 'main' panicked"
+            ],
+            "message": "The program panicked at runtime",
+            "fix": "Check the panic message above for the cause (unwrap on None/Err, assertion failure, etc.)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "index out of bounds"
+            ],
+            "message": "Attempted to access a slice/vector index that is out of range",
+            "fix": "Check the length of the collection before indexing into it, or use .get() instead"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "expected one of"
+            ],
+            "message": "Syntax error in the file",
+            "fix": "Check the file near the reported location for invalid Rust syntax"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "called `option::unwrap()` on a `none` value"
+            ],
+            "message": "Called .unwrap() on a None value",
+            "fix": "Handle the None case explicitly (match, if let, or .unwrap_or/.expect with a clearer message)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "called `result::unwrap()` on an `err` value"
+            ],
+            "message": "Called .unwrap() on an Err value",
+            "fix": "Handle the Err case explicitly instead of unwrapping it directly"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "attempt to divide by zero"
+            ],
+            "message": "Attempted to divide by zero",
+            "fix": "Check the divisor isn't zero before performing the division"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "no method named"
+            ],
+            "message": "Called a method that doesn't exist on this type",
+            "fix": "Check the type's available methods, an import for the trait it comes from, or a typo"
+        }
+    ]
+}

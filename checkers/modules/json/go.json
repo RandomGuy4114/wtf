@@ -1,0 +1,114 @@
+{
+    "name": "Go",
+    "description": "Checks for common Go errors",
+    "errors": [
+        {
+            "type": "Normal",
+            "strings": [
+                "undefined:"
+            ],
+            "message": "Reference to an undeclared identifier",
+            "fix": "Declare the variable/function before use, check for a typo, or add the missing import"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "declared and not used"
+            ],
+            "message": "A local variable was declared but never used",
+            "fix": "Use the variable, or remove it (Go treats unused locals as a compile error)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "imported and not used"
+            ],
+            "message": "A package was imported but never used",
+            "fix": "Use the package, or remove the import"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot use",
+                "as type"
+            ],
+            "message": "Type mismatch when assigning or passing a value",
+            "fix": "Check the expected type and convert or fix the value being passed"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "nil pointer dereference"
+            ],
+            "message": "Attempted to dereference a nil pointer",
+            "fix": "Check the pointer isn't nil before dereferencing it"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "index out of range"
+            ],
+            "message": "Attempted to access a slice/array index that is out of range",
+            "fix": "Check the length of the slice/array before indexing into it"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "multiple-value",
+                "in single-value context"
+            ],
+            "message": "A multi-value expression was used where only one value is allowed",
+            "fix": "Assign each returned value to its own variable (e.g. v, err := f())"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "missing return"
+            ],
+            "message": "A function with a return type is missing a return statement on some path",
+            "fix": "Make sure every code path in the function returns a value"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "no new variables on left side of :="
+            ],
+            "message": "':=' was used without introducing any new variables",
+            "fix": "Use '=' instead of ':=' if all variables on the left already exist"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot find package",
+                "no required module provides package"
+            ],
+            "message": "A required package/module could not be found",
+            "fix": "Run 'go mod tidy' or 'go get <package>' to fetch the missing dependency"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "syntax error"
+            ],
+            "message": "Syntax error in the file",
+            "fix": "Check the file near the reported location for invalid Go syntax"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "divide by zero",
+                "integer divide by zero"
+            ],
+            "message": "Attempted to divide by zero",
+            "fix": "Check the divisor isn't zero before performing the division"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "deadlock"
+            ],
+            "message": "All goroutines are asleep - deadlock detected",
+            "fix": "Check for a channel or mutex that's never unblocked, or a goroutine that never runs"
+        }
+    ]
+}

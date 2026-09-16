@@ -91,6 +91,55 @@
             ],
             "message": "A value of the right type but inappropriate content was passed to a function",
             "fix": "Check the value being passed matches what the function expects"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "recursionerror",
+                "maximum recursion depth exceeded"
+            ],
+            "message": "Stack overflow, usually from unbounded recursion",
+            "fix": "Check for a recursive function that's missing (or never reaches) its base case"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "filenotfounderror"
+            ],
+            "message": "Attempted to open a file that doesn't exist",
+            "fix": "Check the file path for typos, and that it's relative to the right working directory"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "permissionerror"
+            ],
+            "message": "Insufficient permissions to perform the operation",
+            "fix": "Check the file/directory permissions, or run with the necessary privileges"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unboundlocalerror"
+            ],
+            "message": "A local variable was referenced before assignment",
+            "fix": "Assign the variable before using it, or add a 'global'/'nonlocal' declaration if it's meant to refer to an outer scope"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "typeerror: unsupported operand type"
+            ],
+            "message": "Used an operator between two incompatible types",
+            "fix": "Convert one side to match the other's type before applying the operator"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "modulenotfounderror: no module named 'pip'"
+            ],
+            "message": "pip isn't available for this Python installation",
+            "fix": "Run 'python3 -m ensurepip --upgrade' to install pip"
         }
     ]
 }

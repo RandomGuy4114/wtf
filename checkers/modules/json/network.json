@@ -14,7 +14,7 @@
             "type": "Normal",
             "strings": [
                 "connection timed out",
-                "timeout"
+                "i/o timeout"
             ],
             "message": "Connection timed out",
             "fix": "Check your network connection, firewall rules, and that the host is reachable"
@@ -44,6 +44,32 @@
             ],
             "message": "Network is unreachable",
             "fix": "Check your network interface and routing configuration"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "address already in use"
+            ],
+            "message": "The port is already in use by another process",
+            "fix": "Stop the process using that port, or run this one on a different port"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "ssl: certificate_verify_failed",
+                "unable to verify the first certificate",
+                "self signed certificate"
+            ],
+            "message": "TLS certificate verification failed",
+            "fix": "Install the missing CA certificate, or check you're not behind a proxy intercepting TLS"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "too many redirects"
+            ],
+            "message": "The request followed too many redirects and gave up",
+            "fix": "Check for a redirect loop, or that cookies/auth needed to break out of it are being sent"
         }
     ]
 }

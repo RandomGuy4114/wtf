@@ -36,6 +36,47 @@
             ],
             "message": "File or directory not found",
             "fix": "Make sure the file or directory exists and the path is correct"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "is a directory"
+            ],
+            "message": "Tried to treat a directory as a regular file",
+            "fix": "Point the command at a file inside the directory instead of the directory itself"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "too many open files"
+            ],
+            "message": "Hit the OS limit on open file descriptors",
+            "fix": "Raise the open-files limit (ulimit -n), or check for file/socket handles that aren't being closed"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "no space left on device"
+            ],
+            "message": "The disk is full",
+            "fix": "Free up disk space before retrying"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "operation not permitted"
+            ],
+            "message": "The OS refused the operation",
+            "fix": "Check file ownership/permissions, or that this isn't a protected system path (e.g. macOS SIP)"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "killed",
+                "out of memory"
+            ],
+            "message": "The process was killed, likely by the OOM killer",
+            "fix": "Reduce memory usage, or increase the available memory/swap"
         }
     ]
 }

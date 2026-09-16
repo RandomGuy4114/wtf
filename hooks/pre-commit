@@ -10,7 +10,7 @@ go build -o bin/wtf .
 
 fail=0
 
-for fixture in tests/js/*.js tests/python/*.py; do
+for fixture in tests/js/*.js tests/python/*.py tests/go/*.go tests/rust/*.rs; do
 	[ -e "$fixture" ] || continue
 
 	echo "Checking $fixture..."

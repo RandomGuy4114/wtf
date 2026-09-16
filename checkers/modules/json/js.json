@@ -29,9 +29,7 @@
         {
             "type": "Normal",
             "strings": [
-                "cannot read propert",
-                "cannot read propert of undefined",
-                "cannot read propert of null"
+                "cannot read propert"
             ],
             "message": "Attempted to access a property on undefined or null",
             "fix": "Add a null/undefined check before accessing the property"
@@ -75,6 +73,56 @@
             ],
             "message": "Syntax error in the file",
             "fix": "Check the file near the reported location for invalid JavaScript syntax"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "maximum call stack size exceeded"
+            ],
+            "message": "Stack overflow, usually from unbounded recursion",
+            "fix": "Check for a recursive function that's missing (or never reaches) its base case"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "cannot access",
+                "before initialization"
+            ],
+            "message": "Accessed a let/const variable before it was initialized (temporal dead zone)",
+            "fix": "Move the usage after the declaration, or check for a variable shadowing an outer one"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "unexpected end of json input",
+                "is not valid json"
+            ],
+            "message": "Failed to parse a string as JSON",
+            "fix": "Check the input is valid, complete JSON before calling JSON.parse"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "assignment to constant variable"
+            ],
+            "message": "Attempted to reassign a const binding",
+            "fix": "Use 'let' instead of 'const' if the variable needs to be reassigned"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "eaddrinuse"
+            ],
+            "message": "The port is already in use by another process",
+            "fix": "Stop the process using that port, or run this one on a different port"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "err_module_not_found"
+            ],
+            "message": "An ES module import could not be resolved",
+            "fix": "Check the import path and file extension, and that the module is installed"
         }
     ]
 }

@@ -38,7 +38,6 @@ func loadPaths() (Paths, error) {
 	return paths, pathsErr
 }
 
-
 type JSONData struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
@@ -69,7 +68,6 @@ func LoadJSONData(filePath string) (*JSONData, error) {
 
 	return &jsonData, nil
 }
-
 
 // JudgeError scans output against every known error module and prints the
 // fix for the first matching error. It returns true if a fix was found.

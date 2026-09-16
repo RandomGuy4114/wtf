@@ -4,3 +4,5 @@ paths:
   network: "json/network.json"
   js: "json/js.json"
   python: "json/python.json"
+  go: "json/go.json"
+  rust: "json/rust.json"

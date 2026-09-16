@@ -13,7 +13,9 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/fatih/color"
 	"golang.org/x/term"
+	"wtf/checkers"
 )
 
 type location struct {
@@ -24,22 +26,17 @@ type location struct {
 // extractLocations finds every "file:line[:col]" location in a checker's
 // output that points at path itself, each tagged with where it appears in
 // output so it can be matched up against the error text it belongs to.
+// It matches the location regardless of surrounding punctuation, since
+// every language formats it differently: node wraps it in parens
+// ("at foo (file.js:1:13)"), go prints it bare ("file.go:8:14: message"),
+// and rustc/rust panics trail it with a colon ("panicked at file.rs:3:22:").
 func extractLocations(output, path string) []location {
 	base := filepath.Base(path)
-	stackRegexp := regexp.MustCompile(`\(([^()\s]*` + regexp.QuoteMeta(base) + `:\d+:\d+)\)`)
-	fileLineRegexp := regexp.MustCompile(`(?m)^(.+` + regexp.QuoteMeta(filepath.Ext(path)) + `):(\d+)$`)
+	locRegexp := regexp.MustCompile(`([^\s()]*` + regexp.QuoteMeta(base) + `:\d+(?::\d+)?)`)
 
 	var locs []location
-	for _, m := range stackRegexp.FindAllStringSubmatchIndex(output, -1) {
+	for _, m := range locRegexp.FindAllStringSubmatchIndex(output, -1) {
 		locs = append(locs, location{text: output[m[2]:m[3]], idx: m[2]})
-	}
-	if len(locs) == 0 {
-		if m := fileLineRegexp.FindStringSubmatchIndex(output); m != nil {
-			locs = append(locs, location{
-				text: fmt.Sprintf("%s:%s", output[m[2]:m[3]], output[m[4]:m[5]]),
-				idx:  m[0],
-			})
-		}
 	}
 	return locs
 }
@@ -73,4 +70,48 @@ func divider() string {
 		width = 80 // fallback if not a terminal (e.g. piped output)
 	}
 	return strings.Repeat("-", width)
+}
+
+// diagnose loads modulePath's JSON rules and matches them against output,
+// printing (and logging) a fix plus the nearest location for every match.
+// langName is only used for the "no known fix found" message. It's the
+// shared second half of every per-language checker (CheckJSErrors,
+// CheckPythonErrors, etc.) — they differ only in how they produce output.
+func diagnose(output, path, modulePath, langName string) {
+	data, err := checkers.LoadJSONData(modulePath)
+	if err != nil {
+		fmt.Printf("Failed to load %s: %v\n", modulePath, err)
+		return
+	}
+
+	lowerOutput := strings.ToLower(output)
+	locs := extractLocations(output, path)
+	fmt.Println(divider())
+	found := false
+	for _, e := range data.Errors {
+		for _, s := range e.Strings {
+			idx := strings.Index(lowerOutput, strings.ToLower(s))
+			if idx == -1 {
+				continue
+			}
+
+			loc := nearestLocation(locs, idx)
+			fmt.Print(color.RedString("%s: %s\nFix: %s\n", data.Name, e.Message, e.Fix))
+			if loc != "" {
+				fmt.Println(color.YellowString("Location: %s", loc))
+			}
+			fmt.Println(divider())
+			checkers.LogMessage(fmt.Sprintf("%s: %s | Fix: %s | Location: %s", data.Name, e.Message, e.Fix, loc))
+			found = true
+			break
+		}
+	}
+
+	if !found {
+		fmt.Println(color.RedString("No known fix found for this %s error.", langName))
+		if loc := nearestLocation(locs, 0); loc != "" {
+			fmt.Println(color.YellowString("Location: %s", loc))
+		}
+		checkers.LogMessage(fmt.Sprintf("no known fix found for %s error in %s", langName, path))
+	}
 }

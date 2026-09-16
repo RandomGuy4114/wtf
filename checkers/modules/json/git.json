@@ -42,6 +42,63 @@
             ],
             "message": "Git could not reach the remote host",
             "fix": "Check your network connection and that the remote URL is correct"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "remote origin already exists"
+            ],
+            "message": "Tried to add a remote named 'origin' that already exists",
+            "fix": "Use 'git remote set-url origin <url>' to change it, or 'git remote remove origin' first"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "refusing to merge unrelated histories"
+            ],
+            "message": "Tried to merge two branches with no common commit history",
+            "fix": "Add '--allow-unrelated-histories' to the merge/pull command if this is intentional"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "please commit your changes or stash them before you merge",
+                "your local changes to the following files would be overwritten"
+            ],
+            "message": "Uncommitted local changes are blocking the operation",
+            "fix": "Commit or 'git stash' your changes first, then retry"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "permission denied (publickey)"
+            ],
+            "message": "SSH authentication with the remote failed",
+            "fix": "Check your SSH key is added to the agent and registered with the remote host"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "repository not found"
+            ],
+            "message": "The remote repository doesn't exist or you don't have access to it",
+            "fix": "Check the remote URL, and that you have access to the repository"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "you are not currently on a branch"
+            ],
+            "message": "Repository is in a detached HEAD state",
+            "fix": "Run 'git checkout <branch>' to get back on a branch, or 'git checkout -b <new-branch>' to save this state"
+        },
+        {
+            "type": "Normal",
+            "strings": [
+                "src refspec"
+            ],
+            "message": "Tried to push a branch that doesn't exist locally",
+            "fix": "Check the branch name for typos, or make sure you've committed at least once on it"
         }
     ]
 }

@@ -9,10 +9,6 @@ import (
 	"fmt"
 	"os/exec"
 	"path/filepath"
-	"strings"
-
-	"github.com/fatih/color"
-	"wtf/checkers"
 )
 
 func CheckJSErrors(path string) ([]byte, error) {
@@ -26,7 +22,7 @@ func CheckJSErrors(path string) ([]byte, error) {
 	checkOutput, err := checkCmd.CombinedOutput()
 	if err != nil {
 		fmt.Println(string(checkOutput))
-		diagnoseJSError(string(checkOutput), absPath)
+		diagnose(string(checkOutput), absPath, "modules/json/js.json", "JavaScript")
 		return checkOutput, err
 	}
 
@@ -36,46 +32,9 @@ func CheckJSErrors(path string) ([]byte, error) {
 	fmt.Println(string(output))
 
 	if err != nil {
-		diagnoseJSError(string(output), absPath)
+		diagnose(string(output), absPath, "modules/json/js.json", "JavaScript")
 		return output, err
 	}
 
 	return output, nil
-}
-
-func diagnoseJSError(output, path string) {
-	data, err := checkers.LoadJSONData("modules/json/js.json")
-	if err != nil {
-		fmt.Printf("Failed to load js.json: %v\n", err)
-		return
-	}
-
-	lowerOutput := strings.ToLower(output)
-	locs := extractLocations(output, path)
-	fmt.Println(divider())
-	found := false
-	for _, e := range data.Errors {
-		for _, s := range e.Strings {
-			if idx := strings.Index(lowerOutput, strings.ToLower(s)); idx != -1 {
-				CombinedString := fmt.Sprintf("%s: %s\nFix: %s\n", data.Name, e.Message, e.Fix)
-				fmt.Print(color.RedString(CombinedString))
-				loc := nearestLocation(locs, idx)
-				if loc != "" {
-					fmt.Println(color.YellowString("Location: %s", loc))
-				}
-				fmt.Println(divider())
-				checkers.LogMessage(fmt.Sprintf("%s: %s | Fix: %s | Location: %s", data.Name, e.Message, e.Fix, loc))
-				found = true
-				break
-			}
-		}
-	}
-
-	if !found {
-		fmt.Println(color.RedString("No known fix found for this JavaScript error."))
-		if loc := nearestLocation(locs, 0); loc != "" {
-			fmt.Println(color.YellowString("Location: %s", loc))
-		}
-		checkers.LogMessage("no known fix found for JavaScript error in " + path)
-	}
 }

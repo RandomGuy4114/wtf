@@ -18,7 +18,7 @@ func TestExtractLocations(t *testing.T) {
 				"ReferenceError: z is not defined\n" +
 				"    at Object.<anonymous> (/private/tmp/runtimebad.js:1:13)\n" +
 				"    at Module._compile (node:internal/modules/cjs/loader:1934:14)\n",
-			want: []string{"/private/tmp/runtimebad.js:1:13"},
+			want: []string{"/private/tmp/runtimebad.js:1", "/private/tmp/runtimebad.js:1:13"},
 		},
 		{
 			name: "syntax error with no stack frame",
@@ -35,6 +35,22 @@ func TestExtractLocations(t *testing.T) {
 			path:   "/tmp/clean.js",
 			output: "hi\n",
 			want:   nil,
+		},
+		{
+			name: "go vet output",
+			path: "/private/tmp/undefined_var.go",
+			output: "# command-line-arguments\n" +
+				"# [command-line-arguments]\n" +
+				"vet: /private/tmp/undefined_var.go:6:14: undefined: undefinedVar\n",
+			want: []string{"/private/tmp/undefined_var.go:6:14"},
+		},
+		{
+			name: "rust panic output",
+			path: "/private/tmp/unwrap_none.rs",
+			output: "thread 'main' (852916) panicked at /private/tmp/unwrap_none.rs:3:22:\n" +
+				"called `Option::unwrap()` on a `None` value\n" +
+				"note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace\n",
+			want: []string{"/private/tmp/unwrap_none.rs:3:22"},
 		},
 	}
 
